@@ -133,6 +133,20 @@ molho francês.
 
 
 
+Serviços prestados
+
+Rodízio
+Boi no especto
+Cabrite
+Franguite
+Leitão no espeto
+Garcons
+Cocktail
+Protocolo
+Segurança para eventos
+Limpeza de salões após evento.
+
+
 
 
 
