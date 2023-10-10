@@ -886,7 +886,13 @@ molho francês<br/>
               <p>Faça a sua Reserva</p>
           </div>
       
-          <form action="forms/book-a-table.php" method="post" role="form" class="php-email-form" data-aos="fade-up" data-aos-delay="100">
+          <form   method="post"
+          role="form"
+          class="php-email-form"
+          hx-post="https://iddias-api.vercel.app/api/iddias/emailsender" 
+          hx-trigger="submit"
+          hx-swap="outerHTML"
+          hx-target="#form-container" data-aos="fade-up" data-aos-delay="100">
               <div class="row">
                   <div class="col-lg-4 col-md-6 form-group">
                       <input type="text" name="name" class="form-control" id="name" placeholder="Seu Nome" data-rule="minlen:4" data-msg="Por favor, insira pelo menos 4 caracteres" />
@@ -930,8 +936,8 @@ molho francês<br/>
                       <div class="validate"></div>
                   </div>
                   <div class="col-md-6 form-group mt-3">
-                    <label for="package">Escolha o tipo de pacote:</label>
-                    <select class="form-control" name="package" id="package">
+                    <label for="packageType">Escolha o tipo de pacote:</label>
+                    <select class="form-control" name="packageType" id="packageType">
                         <option value="pacote_basico">Com Nosso Produto</option>
                         <option value="pacote_vip">Com Seu Produto</option>
                     </select>
@@ -944,9 +950,7 @@ molho francês<br/>
               </div>
               <div class="mb-3">
                   <div class="loading">Carregando</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">
-                      Sua solicitação de reserva foi enviada. Nós entraremos em contato para confirmar a sua reserva. Obrigado!
+                  <div class="sent-message" id="form-container">
                   </div>
               </div>
               <div class="text-center">
