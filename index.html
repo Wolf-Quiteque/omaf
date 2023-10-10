@@ -46,6 +46,19 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+
+  <style>
+       .htmx-indicator{
+        opacity:0;
+        transition: opacity 500ms ease-in;
+    }
+    .htmx-request .htmx-indicator{
+        opacity:1
+    }
+    .htmx-request.htmx-indicator{
+        opacity:1
+    }
+  </style>
   </head>
 
   <body>
@@ -890,7 +903,8 @@ molho francês<br/>
           method="post"
           role="form"
           class="php-email-form"
-          hx-post="https://fantastic-guide-9q7v9v7gx9jfxxjv-4000.app.github.dev/api/iddias/emailsender"
+          hx-post="https://iddias-api.vercel.app/api/iddias/emailsender"
+          
           hx-trigger="submit"
           hx-swap="outerHTML"
           hx-target="#form-container"
