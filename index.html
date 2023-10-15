@@ -47,18 +47,7 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 
-  <style>
-       .htmx-indicator{
-        opacity:0;
-        transition: opacity 500ms ease-in;
-    }
-    .htmx-request .htmx-indicator{
-        opacity:1
-    }
-    .htmx-request.htmx-indicator{
-        opacity:1
-    }
-  </style>
+
   </head>
 
   <body>
@@ -903,14 +892,7 @@ molho francês<br/>
           method="post"
           role="form"
           class="php-email-form"
-          hx-post="https://iddias-api.vercel.app/api/iddias/emailsender"
-          
-          hx-trigger="submit"
-          hx-swap="outerHTML"
-          hx-target="#form-container"
-          data-aos="fade-up"
-          data-aos-delay="100"
-          hx-indicator="#spinner"
+         
         >
               <div class="row">
                   <div class="col-lg-4 col-md-6 form-group">
@@ -968,8 +950,7 @@ molho francês<br/>
                   <div class="validate"></div>
               </div>
               <div class="mb-3">
-                <div class="loading" id="spinner" >
-                  Carregando
+                <div id="spinner" >
                 </div>
                 <div class="sent-message" id="form-container">
                 </div>
@@ -1814,6 +1795,7 @@ BFA: 0006.0000.3185.1082.301.04</p>
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script>
     window.addEventListener('load', () => {
       let menuContainer = select('.menu-container');
@@ -1858,5 +1840,54 @@ BFA: 0006.0000.3185.1082.301.04</p>
       }
     });
     </script>
+
+  <script>
+    $(document).ready(function() {
+      $("form.php-email-form").submit(async function(event) {
+        event.preventDefault(); // Prevent the default form submission
+    
+        var formData = $(this).serialize(); // Serialize the form data
+    
+        try {
+          const response = await sendAjaxRequest(formData);
+      
+    
+          // Check if the API response contains a "message" field
+          if (response.message) {
+            // Display the success message in the form container
+            $("#spinner").html('<div class="alert alert-success">' + response.message + '</div>');
+            console.log(response)
+          } else {
+            $("#form-container").html("Error occurred.");
+          }
+        } catch (error) {
+          // Handle errors, if any
+          $("#form-container").html("Error occurred.");
+        }
+      });
+    
+      async function sendAjaxRequest(formData) {
+        return new Promise(function(resolve, reject) {
+          $.ajax({
+            type: "POST",
+            url: "https://iddias-api.vercel.app/api/iddias/emailsender",
+            data: formData,
+            beforeSend: function() {
+              // Show a loading indicator
+              $("#spinner").html("Carregando...");
+            },
+            success: function(response) {
+              resolve(response);
+            },
+            error: function(xhr, status, error) {
+              reject(error);
+            }
+          });
+        });
+      }
+    });
+    </script>
+    
+
   </body>
 </html>
